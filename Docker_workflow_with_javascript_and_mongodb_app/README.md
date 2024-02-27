@@ -3,7 +3,7 @@ We start by pulling MongoDB  and Mogo-express images
 docker pull mongo
 docker pull mongo-express
 ```
-![docker](./images/images.png)
+![docker](../images/images.png)
 
 Next, we have to run both mongoDB and Mongo-Express container. Before then we have to understand thr concept of `Docker Network`, Wwhich we will use to establish connection between the two containers.
 

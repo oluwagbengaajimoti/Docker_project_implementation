@@ -49,5 +49,6 @@ To stop all the containers created by docker-compose, we use the command below i
 
 ```
 docker-compose -f Mongo-docker-compose.yaml down
+
 ```
 To stop all the

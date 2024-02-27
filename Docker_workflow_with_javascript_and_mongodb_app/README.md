@@ -57,3 +57,4 @@ From the mongo-express interface, create a database with the name `user-account`
 
 ### NodeJS
 Lastly, setup your nodeJS server, and access the application on `http://0.0.0.0:3000`
+

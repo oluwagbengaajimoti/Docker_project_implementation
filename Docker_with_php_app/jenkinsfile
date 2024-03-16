@@ -1,0 +1,11 @@
+pipeline {
+    agent {
+        label "docker-server"
+    }
+    stages {
+        stage ('run docker compose file') {
+            steps {
+            }
+        }
+    }
+}

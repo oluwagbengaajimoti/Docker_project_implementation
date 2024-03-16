@@ -1,0 +1,40 @@
+#docker version
+Version: "3" 
+services:
+
+  #building php-apache from dockerfile
+  www:
+    build: .
+    ports: "81:80"
+    volume: 
+      - ./wordpress/ /var/www/html/
+    link: database
+
+  #mysql database section
+  database:
+    image: mysql
+    ports: "3306:3306"
+    volume: 
+      #- ./wordpress.sql:/docker-entrypoint-initdb.d
+      - persistent:/var/lib/mysql
+    enviroment:
+      MYSQL_ROOT_PASSWORD=gshare01
+      MYSQL_DATABASE=wordpressdb
+      MYSQL_USER=wordpress
+      MYSQL_PASSWORD=wordpresspw
+      MYSQL_ALLOW_EMPTY_PASSWORD=1
+    
+
+  #phpmyadmin section
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports: "82:80"
+    link: database
+    environment:
+      MYSQL_ROOT_PASSWORD=gshare01
+      MYSQL_USER=wordpress
+      MYSQL_PASSWORD=wordpresspw
+      #PMA_HOST=database
+      #PMA_PORT=3306
+volume: 
+  - persistent:

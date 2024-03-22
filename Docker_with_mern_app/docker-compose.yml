@@ -1,0 +1,42 @@
+version: '3'
+services:
+  mongo:
+    image: mongo
+    container_name: mongodb_contaniner
+    ports: 
+      - 27017:27017
+    volumes:
+      - mongo-data:/data/db
+
+  nodejs_app:
+    build: ./server
+    container_name: nodejs_contaniner
+    ports:
+      -5000:5000
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_URI="mongodb://mongo:27017/mydb"
+      - PORT=5000
+    volumes:
+      - /server:/mern_app
+      - /server/node_modules
+
+  react-app:
+    build: ./client
+    container_name: react_contaniner
+    ports: 
+      - 3000:3000
+    stdin_open: true
+    tty: true
+    depends_on:
+      - nodejs_app
+    environment:
+      - REACT_APP_YOUR_HOSTNAME="http://localhost:5000"
+    volumes:
+      - /client:/mern_app
+      - /client/node_modules
+
+volumes:
+  mongo-data:
+
